@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leave Posting Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 1100px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+      gap: 20px;
+    }
+
+    .form-group {
+      flex: 1 1 300px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      margin-bottom: 5px;
+    }
+
+    .form-group input,
+    .form-group select {
+      padding: 8px;
+      font-size: 14px;
+    }
+
+    .buttons {
+      text-align: right;
+      margin-top: 10px;
+    }
+
+    .buttons button {
+      padding: 10px 20px;
+      margin-left: 10px;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .profile-holder {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 100px;
+      height: 120px;
+      border: 1px solid #ccc;
+      background-image: url('https://media.istockphoto.com/id/2172317014/photo/happy-hispanic-man-working-on-laptop-at-home.jpg?s=2048x2048&w=is&k=20&c=jJPw6z79N7HyqjrQcXravLUlk7JT-uOCoehbXc43Rco=');
+      background-size: cover;
+      background-position: center;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="profile-holder"></div>
+    <h2>Leave Setup</h2>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="employeeId">Employee ID:</label>
+        <input type="text" id="employeeId" placeholder="Type emp. id">
+      </div>
+
+      <div class="form-group">
+        <label for="employeeName">Employee Name:</label>
+        <input type="text" id="employeeName">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="orgName">Institution/Organization/Firm Name:</label>
+        <input type="text" id="orgName">
+      </div>
+
+      <div class="form-group">
+        <label for="year">Year:</label>
+        <input type="number" id="year" value="2025">
+      </div>
+
+      <div class="form-group">
+        <label for="month">Month:</label>
+        <select id="month">
+          <option selected>April</option>
+        </select>
+      </div>
+    </div>
+
+    <hr>
+    <h2>Leave Details</h2>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="fromDate">From Date:</label>
+        <input type="date" id="fromDate">
+      </div>
+
+      <div class="form-group">
+        <label for="toDate">To Date:</label>
+        <input type="date" id="toDate">
+      </div>
+
+      <div class="form-group">
+        <label for="dayType">Half/Full Day:</label>
+        <select id="dayType">
+          <option>Full Day</option>
+          <option>Half Day</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="leaveType">Leave Type:</label>
+        <select id="leaveType">
+          <option value="">Select</option>
+          <option value="Casual">Casual Leave</option>
+          <option value="Sick">Sick Leave</option>
+          <option value="Maternity">Maternity Leave</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="balance">Balance:</label>
+        <input type="text" id="balance">
+      </div>
+
+      <div class="form-group">
+        <label for="reason">Reason for Leave:</label>
+        <input type="text" id="reason">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="remarks">Remarks:</label>
+        <input type="text" id="remarks">
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button onclick="applyLeave()">Apply</button>
+      <button onclick="saveDetails()">Save Details</button>
+    </div>
+
+    <h2>Employee Leave Details</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Att. Date</th>
+          <th>Shift</th>
+          <th>Leave Type</th>
+          <th>Leave Duration</th>
+          <th>Reason of Leave</th>
+          <th>Posted By</th>
+          <th>Reason</th>
+          <th>Approval No.</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="leaveDetailsBody">
+        <!-- Dynamic rows -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function applyLeave() {
+      alert("Leave applied.");
+    }
+
+    function saveDetails() {
+      const table = document.getElementById("leaveDetailsBody");
+      const row = table.insertRow();
+      row.insertCell(0).innerText = table.rows.length + 1;
+      row.insertCell(1).innerText = document.getElementById("fromDate").value;
+      row.insertCell(2).innerText = "1st Half"; // Example shift
+      row.insertCell(3).innerText = document.getElementById("leaveType").value;
+      row.insertCell(4).innerText = "1 Day"; // Example
+      row.insertCell(5).innerText = document.getElementById("reason").value;
+      row.insertCell(6).innerText = document.getElementById("employeeName").value;
+      row.insertCell(7).innerText = document.getElementById("remarks").value;
+      row.insertCell(8).innerText = "AUTO123";
+      row.insertCell(9).innerText = "Pending";
+    }
+  </script>
+</body>
+</html>
